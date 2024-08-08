@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Venue</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1/dist/css/bootstrap.min.css">
+</head>
+
+<body class="bg-light text-dark">
+    <div class="container mt-3 col-4">
+        <h2>Edit the venue</h2>
+        <form action="/update_venue/{{ venue_obj.venue_id }}" method="POST">
+            <div>
+                <label for="venue_name">Venue Name</label>
+                <input type="text" class="form-control" id="venue_name" name="venue_name"
+                    value={{venue_obj.venue_name}}>
+            </div>
+
+            <div class="mb-3">
+                <label for="venue_place">Place</label>
+                <select name="venue_place" class="form-control">
+                    <option type="text" value="IIT M" {% if venue_obj.venue_place=="IIT M" %} selected="selected" {%
+                        endif %}>IIT M</option>
+                    <option type="text" value="IIT B" {% if venue_obj.venue_place=="IIT B" %} selected="selected" {%
+                        endif %}>IIT B</option>
+                    <option type="text" value="IIT K" {% if venue_obj.venue_place=="IIT K" %} selected="selected" {%
+                        endif %}>IIT K</option>
+
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="venue_location">Location</label>
+                <select name="venue_location" class="form-control">
+                    <option type="text" value="Chennai" {% if venue_obj.venue_location=="Chennai" %} selected="selected"
+                        {% endif %}>Chennai</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="venue_capacity">Capacity</label>
+                <input type="text" class="form-control" id="venue_capacity" name="venue_capacity"
+                    value={{venue_obj.venue_capacity}}>
+
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary" type="submit" value="Save">
+            </div>
+
+
+        </form>
+    </div>
+</body>
+
+</html>

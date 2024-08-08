@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/user_dashboard">{{ user_obj.username }} Dashboard </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto ">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/edit_profile">Profile</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/user_dashboard">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/logout">logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-3">
+        {% set booking_list = user_obj.shows_booked %}
+        {% for entry in booking_list %}
+        <div class="card mt-2 bg-light text-dark">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <h5 class="card-title"> {{ entry.venue_name_booked}}-{{ entry.show_name_booked}}</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 class="card-title"> {{ entry.bookedshow_start_timing}}-{{ entry.bookedshow_end_timing}}</h5>
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-secondary btn-md" style="margin-left:50%" onclick="rate_show()"
+                            type="button">Rate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function rate_show() {
+            window.open("/rating", 'popup', 'width=300,height=300');
+        }
+    </script>
+
+</body>
+
+</html>

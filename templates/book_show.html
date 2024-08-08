@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Show</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1/dist/css/bootstrap.min.css">
+
+</head>
+
+<body class="bg-light text-dark">
+    <div class="container mt-3 col-4">
+
+        {% if display_msg|length !=0 %}
+        <h3>{{ display_msg}} </h3>
+        {% endif %}
+        <div class="mb-3">
+            <h5>Booking-{{ show_obj.show_name }} {{show_obj.venue_details[0].venue_name }} </h5>
+            <h5>Time:{{show_obj.show_start_timing }} - {{ show_obj.show_end_timing}} </h5>
+        </div>
+
+        <form action="/book_show/{{ show_obj.show_id }}" method="POST">
+            <div class="mb-3">
+                <label for="available_seats">Available seats: {{ show_obj.show_capacity}}</label>
+            </div>
+
+            <div class="mb-3">
+                <label for="num_tickets">Number</label>
+                <input type="text" class="form-control" id="num_tickets" name="num_tickets">
+
+            </div>
+
+            <div class="mb-3">
+                <label for="price">Price</label>
+                <input type="text" class="form-control" id="price" name="price" value={{show_obj.show_ticket_price}}
+                    readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="total_price">Total </label>
+                <input type="text" class="form-control" id="total_price" name="total_price">
+            </div>
+
+            <div class="text-center">
+                <input class="btn btn-primary" type="submit" id="submit" value="Confirm Booking">
+            </div>
+
+            <script>
+                const num_tickets = document.getElementById('num_tickets');
+                const price = document.getElementById('price');
+                const total_price = document.getElementById('total_price');
+
+                function get_total_price() {
+                    total_price.value = (num_tickets.value) * price.value;
+                }
+                num_tickets.addEventListener('keyup', get_total_price);
+
+            </script>
+        </form>
+    </div>
+</body>
+
+</html>
